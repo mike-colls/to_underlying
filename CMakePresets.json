@@ -1,0 +1,53 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/build/presets/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/presets/${presetName}/install",
+                "CMAKE_TOOLCHAIN_FILE": {
+                    "type": "FILEPATH",
+                    "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+                }
+            },
+            "warnings": {
+                "dev": true
+            }
+        },
+        {
+            "name": "x64-debug",
+            "inherits": [
+                "base"
+            ],
+            "generator": "Ninja",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CTRL_WITH_EXAMPLES": true,
+                "CTRL_WITH_TESTS": true
+            }
+        },
+        {
+            "name": "x64-release",
+            "inherits": [
+                "base"
+            ],
+            "generator": "Ninja",
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_INTERPROCEDURAL_OPTIMIZATION": true,
+                "CTRL_WITH_EXAMPLES": true,
+                "CTRL_WITH_TESTS": true
+            }
+        }
+    ]
+}
